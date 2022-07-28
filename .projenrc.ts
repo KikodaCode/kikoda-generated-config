@@ -35,6 +35,7 @@ const project = new TypeScriptProject({
     compilerOptions: { esModuleInterop: true },
   },
   devDeps: ['@kikoda/projen-templates', '@types/md5'],
+  peerDeps: ['webpack'],
   packageName: '@kikoda/delivery',
   gitignore: [],
   githubOptions: {
