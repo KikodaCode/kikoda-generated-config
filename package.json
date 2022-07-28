@@ -33,6 +33,7 @@
   "devDependencies": {
     "@kikoda/projen-templates": "^0.1.44",
     "@types/jest": "^28.1.6",
+    "@types/md5": "^2.3.2",
     "@types/node": "^14",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
@@ -53,6 +54,14 @@
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4"
   },
+  "dependencies": {
+    "md5": "^2.3.0",
+    "webpack-manifest-plugin": "^5.0.0"
+  },
+  "bundledDependencies": [
+    "md5",
+    "webpack-manifest-plugin"
+  ],
   "keywords": [
     "cicd",
     "configuration",

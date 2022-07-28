@@ -30,11 +30,11 @@ const project = new TypeScriptProject({
       endOfLine: EndOfLine.LF,
     },
   },
+  bundledDeps: ['md5', 'webpack-manifest-plugin'],
   tsconfig: {
     compilerOptions: { esModuleInterop: true },
-    include: ['src/typescript-function/esbuild.js'],
   },
-  devDeps: ['@kikoda/projen-templates'],
+  devDeps: ['@kikoda/projen-templates', '@types/md5'],
   packageName: '@kikoda/delivery',
   gitignore: [],
   githubOptions: {
