@@ -24,7 +24,7 @@ Use this plugin to inject config values depending on environment.
 Add this to your `craco.config.js`:
 
 ```typescript
-import { GeneratedConfig } from '@kikoda/delivery';
+import { GeneratedConfig } from '@kikoda/generated-config';
 
 const { fileName } = new GeneratedConfig({
   stage: "local",
