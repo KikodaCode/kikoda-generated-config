@@ -18,6 +18,10 @@
       "type": "build"
     },
     {
+      "name": "@types/react",
+      "type": "build"
+    },
+    {
       "name": "@types/uuid",
       "type": "build"
     },
@@ -83,6 +87,10 @@
       "type": "build"
     },
     {
+      "name": "react",
+      "type": "build"
+    },
+    {
       "name": "standard-version",
       "version": "^9",
       "type": "build"
@@ -114,6 +122,10 @@
     {
       "name": "webpack-manifest-plugin",
       "type": "bundled"
+    },
+    {
+      "name": "react",
+      "type": "peer"
     },
     {
       "name": "webpack",

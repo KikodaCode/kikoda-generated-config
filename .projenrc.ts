@@ -1,7 +1,7 @@
 import { KikodaOpenSourceProject } from '@kikoda/projen-templates';
 import { YamlFile } from 'projen';
 import { GithubCredentials } from 'projen/lib/github';
-import { ArrowParens, EndOfLine, TrailingComma } from 'projen/lib/javascript';
+import { ArrowParens, EndOfLine, TrailingComma, TypeScriptJsxMode } from 'projen/lib/javascript';
 import { TypeScriptProject } from 'projen/lib/typescript';
 
 const project = new TypeScriptProject({
@@ -32,10 +32,17 @@ const project = new TypeScriptProject({
   },
   bundledDeps: ['md5', 'webpack-manifest-plugin'],
   tsconfig: {
-    compilerOptions: { esModuleInterop: true },
+    compilerOptions: { esModuleInterop: true, lib: ['dom'], jsx: TypeScriptJsxMode.REACT },
   },
-  devDeps: ['@kikoda/projen-templates', '@types/md5', 'uuid', '@types/uuid'],
-  peerDeps: ['webpack'],
+  devDeps: [
+    '@kikoda/projen-templates',
+    '@types/md5',
+    'uuid',
+    '@types/uuid',
+    'react',
+    '@types/react',
+  ],
+  peerDeps: ['webpack', 'react'],
   packageName: '@kikoda/generated-config',
   gitignore: [],
   githubOptions: {
