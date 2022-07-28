@@ -18,6 +18,7 @@ const project = new TypeScriptProject({
   devContainer: true,
   vscode: true,
   prettier: true,
+  releaseToNpm: true,
   prettierOptions: {
     settings: {
       printWidth: 100,
