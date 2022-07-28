@@ -1,17 +1,33 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
-import md5 from 'md5';
+// import { DefaultConfigDir } from './constants';
+// @ts-ignore
+import md5 = require('md5');
+
+const SUPPORTED_CONFIG_EXTENSIONS = ['.json', '.js', '.ts'];
 
 export const DefaultConfigDir: string = 'config';
+
 export interface GeneratedConfigProps {
-  /** target deployment stage */
+  /**
+   * Target deployment stage
+   */
   readonly stage: string;
 
-  /** full absolute path of the service/app */
+  /**
+   * Full absolute path of the service/app
+   */
   readonly servicePath: string;
 
-  /** path relative to servicePath where *.config.json files are stored */
+  /** path relative to servicePath where *.config.* files are stored */
   readonly configDir?: string;
+
+  /**
+   * Base config file name (if applicable)
+   *
+   * @default `base.config.ts`
+   */
+  baseConfigFileName?: string;
 
   /** write the generated config file to a directory; relative to servicePath */
   readonly outDir?: string;
@@ -38,6 +54,9 @@ export class GeneratedConfig<T extends AdditionalConfig> {
   constructor(props: GeneratedConfigProps) {
     this.props = props;
 
+    // set some defaults
+    this.props.baseConfigFileName = this.props.baseConfigFileName ?? 'base.config.ts';
+
     // generate config
     this.config = this.generate();
 
@@ -50,33 +69,46 @@ export class GeneratedConfig<T extends AdditionalConfig> {
 
   private generate = (): T => {
     const configDir = `${this.props.servicePath}/${this.props.configDir ?? DefaultConfigDir}`;
-    const baseConfigFilePath = `${configDir}/base.config.js`;
-    const stageConfigFilePath = `${configDir}/${this.props.stage}.config.js`;
+    const baseConfigFilePath = `${configDir}/${this.props.baseConfigFileName}`;
+    const stageConfigFilePath = `${configDir}/${this.props.stage}.config`;
 
     let finalConfig = {};
 
-    if (existsSync(baseConfigFilePath)) {
+    if (
+      SUPPORTED_CONFIG_EXTENSIONS.map(ext =>
+        existsSync(`${baseConfigFilePath.replace(ext, '')}${ext}`),
+      ).reduce((prev, curr) => prev || curr, false)
+    ) {
       const baseConfig = require(baseConfigFilePath);
-      finalConfig = Object.assign({}, finalConfig, baseConfig);
+      finalConfig = Object.assign({}, finalConfig, baseConfig.default || baseConfig);
     } else {
       console.log(
         `No base config found... skipping inheritence. Expected to find ${baseConfigFilePath}`,
       );
     }
 
-    if (existsSync(stageConfigFilePath)) {
+    if (
+      SUPPORTED_CONFIG_EXTENSIONS.map(ext => existsSync(`${stageConfigFilePath}${ext}`)).reduce(
+        (prev, curr) => prev || curr,
+        false,
+      )
+    ) {
       // layer config
       const stageConfig = require(stageConfigFilePath);
-      finalConfig = Object.assign({}, finalConfig, stageConfig, {
+      finalConfig = Object.assign({}, finalConfig, stageConfig.default || stageConfig);
+    } else {
+      console.log(
+        `Missing config file for stage: ${this.props.stage}. Expected ${stageConfigFilePath}... moving on without config`,
+      );
+    }
+
+    // always add in additionalConfig
+    if (!!this.props.additionalConfig)
+      finalConfig = Object.assign({}, finalConfig, {
         additionalConfig: this.props.additionalConfig,
       });
 
-      return finalConfig as T;
-    } else {
-      throw new Error(
-        `Missing config file for stage: ${this.props.stage}. Expected ${stageConfigFilePath}`,
-      );
-    }
+    return finalConfig as T;
   };
 
   private writeToFile = () => {

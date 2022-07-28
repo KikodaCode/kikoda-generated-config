@@ -1,6 +1,6 @@
 {
-  "name": "@kikoda/delivery",
-  "description": "Collection of useful things",
+  "name": "@kikoda/generated-config",
+  "description": "Generated Config webpack plugin and utilities.",
   "repository": {
     "type": "git",
     "url": "https://github.com/KikodaCode/kikoda-delivery.git"
@@ -35,6 +35,7 @@
     "@types/jest": "^28.1.6",
     "@types/md5": "^2.3.2",
     "@types/node": "^14",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
     "eslint": "^8",
@@ -53,6 +54,7 @@
     "ts-jest": "^28.0.7",
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4",
+    "uuid": "^8.3.2",
     "webpack": "5.74.0"
   },
   "peerDependencies": {
@@ -69,6 +71,8 @@
   "keywords": [
     "cicd",
     "configuration",
+    "react",
+    "webpack",
     "websites"
   ],
   "main": "lib/index.js",
@@ -76,7 +80,8 @@
   "version": "0.0.0",
   "jest": {
     "coveragePathIgnorePatterns": [
-      "/node_modules/"
+      "/node_modules/",
+      "test/config"
     ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.ts?(x)",

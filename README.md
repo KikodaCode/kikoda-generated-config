@@ -1,25 +1,26 @@
 [<img src="https://kikoda.com/wp-content/uploads/2019/07/Logo_White_bg.svg" width="300"/>](https://kikoda.com)
-# Kikoda Delivery Library
+# Kikoda Generated Config Webpack Plugin
 
-[![NPM](https://img.shields.io/npm/v/@kikoda/delivery?color=39a356&label=npm+cdk+v2)](https://www.npmjs.com/package/@kikoda/delivery)
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/KikodaCode/delivery/blob/main/LICENSE)
+[![NPM](https://img.shields.io/npm/v/@kikoda/delivery?color=39a356&label=npm)](https://www.npmjs.com/package/@kikoda/generated-config)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/KikodaCode/generated-config/blob/main/LICENSE)
 
-Use this Kikoda CDK Constructs Library to architect and model modern applications deployed with AWS CDK.
+Use this Kikoda Generated Config webpack plugin.
 
 ## Install from NPM:
 ```
-yarn add --dev @kikoda/delivery
+yarn add --dev @kikoda/generated-config
 
 # or
 
-npm install @kikoda/delivery --save-dev
+npm install @kikoda/generated-config --save-dev
 ```
 
 ## Usage
 
-### Generaged Config for craco react apps
-The Kikoda currently only supports `craco`.
+### Generaged Config for webpack apps
+Use this plugin to inject config values depending on environment.
 
+#### CRACO
 Add this to your `craco.config.js`:
 
 ```typescript

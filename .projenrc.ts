@@ -5,13 +5,13 @@ import { ArrowParens, EndOfLine, TrailingComma } from 'projen/lib/javascript';
 import { TypeScriptProject } from 'projen/lib/typescript';
 
 const project = new TypeScriptProject({
-  name: 'kikoda-delivery',
-  description: 'Collection of useful things',
+  name: 'kikoda-generated-config',
+  description: 'Generated Config webpack plugin and utilities.',
   authorName: 'Kikoda, LLC',
   authorEmail: 'platform@kikoda.com',
   repository: 'https://github.com/KikodaCode/kikoda-delivery.git',
   defaultReleaseBranch: 'main',
-  keywords: ['configuration', 'websites', 'cicd'],
+  keywords: ['configuration', 'websites', 'cicd', 'webpack', 'react'],
   stability: 'experimental',
   license: 'Apache-2.0',
   projenrcTs: true,
@@ -34,9 +34,9 @@ const project = new TypeScriptProject({
   tsconfig: {
     compilerOptions: { esModuleInterop: true },
   },
-  devDeps: ['@kikoda/projen-templates', '@types/md5'],
+  devDeps: ['@kikoda/projen-templates', '@types/md5', 'uuid', '@types/uuid'],
   peerDeps: ['webpack'],
-  packageName: '@kikoda/delivery',
+  packageName: '@kikoda/generated-config',
   gitignore: [],
   githubOptions: {
     projenCredentials: GithubCredentials.fromApp(),
@@ -49,7 +49,7 @@ const project = new TypeScriptProject({
   },
   jestOptions: {
     jestConfig: {
-      coveragePathIgnorePatterns: ['/node_modules/'],
+      coveragePathIgnorePatterns: ['/node_modules/', 'test/config'],
     },
   },
 });
@@ -71,7 +71,7 @@ new YamlFile(project, 'codecov.yml', {
 });
 
 new KikodaOpenSourceProject(project, {
-  title: 'Kikoda delivery library',
+  title: 'Kikoda Generated Config plugin',
 });
 
 project.synth();

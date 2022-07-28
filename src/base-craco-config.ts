@@ -1,4 +1,4 @@
-import { WebpackConfigFilePlugin } from './plugins/WebpackConfigFilePlugin';
+import { WebpackConfigFilePlugin } from './plugins/webpack-config-file-plugin';
 import { WebpackConfig } from './types';
 
 export const BaseCracoConfig = (options: {
