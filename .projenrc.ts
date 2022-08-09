@@ -63,12 +63,6 @@ const project = new TypeScriptProject({
   },
 });
 
-// Run Build workflow on push to main to update base code coverage
-const buildWorkflow = project.github?.tryFindWorkflow('build');
-buildWorkflow?.on({
-  push: { branches: ['main'] },
-});
-
 new YamlFile(project, 'codecov.yml', {
   obj: {
     coverage: {
