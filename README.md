@@ -1,10 +1,10 @@
 [<img src="https://kikoda.com/wp-content/uploads/2019/07/Logo_White_bg.svg" width="300"/>](https://kikoda.com)
-# Kikoda Generated Config Webpack Plugin
+# Kikoda Generated Config
 
-[![NPM](https://img.shields.io/npm/v/@kikoda/delivery?color=39a356&label=npm)](https://www.npmjs.com/package/@kikoda/generated-config)
+[![NPM](https://img.shields.io/npm/v/@kikoda/generated-config?color=39a356&label=npm)](https://www.npmjs.com/package/@kikoda/generated-config)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/KikodaCode/generated-config/blob/main/LICENSE)
 
-Use this Kikoda Generated Config webpack plugin.
+Use this Kikoda Generated Config package to generate layered configurations and runtime configuration manifest files for webpack builds configured with CRACO.
 
 ## Install from NPM:
 ```
@@ -18,7 +18,7 @@ npm install @kikoda/generated-config --save-dev
 ## Usage
 
 ### Generaged Config for webpack apps
-Use this plugin to inject config values depending on environment.
+Use this package and plugin in conjunction with CRACO to inject config values depending on environment.
 
 #### CRACO
 Add this to your `craco.config.js`:
@@ -27,24 +27,17 @@ Add this to your `craco.config.js`:
 import { GeneratedConfig } from '@kikoda/generated-config';
 
 const { fileName } = new GeneratedConfig({
-  stage: "local",
-  servicePath: resolve(__dirname, "./"),
-  outDir: "public",
-  additionalConfig: {
-    // only for local environmental overrides... this will be dynamically populated at deploy-time for each stage
-    platform: {
-      backend: {
-        endpoint: "http://localhost:8080/",
-      },
-    },
-  },
+  stage: "<stage-name>",
+  servicePath: './app',
 });
 ​
-// only include config file stuff, no mfe config
 module.exports = {
-  plugins: [{ plugin: WebpackConfigFilePlugin(fileName) }],
+  plugins: [{ plugin: ConfigManifestPlugin(fileName) }],
 };
 ```
+
+#### Verbose Logging
+Enable verbose logging by setting the `DEBUG` environment variable to 'true'
 
 ## Opening Issues
 
