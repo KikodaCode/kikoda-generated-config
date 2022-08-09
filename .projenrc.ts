@@ -31,17 +31,18 @@ const project = new TypeScriptProject({
       endOfLine: EndOfLine.LF,
     },
   },
-  bundledDeps: ['md5', 'webpack-manifest-plugin'],
+  bundledDeps: ['md5', 'webpack-manifest-plugin', 'lodash'],
   tsconfig: {
     compilerOptions: { esModuleInterop: true, lib: ['dom'], jsx: TypeScriptJsxMode.REACT },
   },
   devDeps: [
     '@kikoda/projen-templates',
+    '@types/lodash',
     '@types/md5',
-    'uuid',
+    '@types/react',
     '@types/uuid',
     'react',
-    '@types/react',
+    'uuid',
   ],
   peerDeps: ['webpack', 'react'],
   packageName: '@kikoda/generated-config',
@@ -79,7 +80,7 @@ new YamlFile(project, 'codecov.yml', {
 });
 
 new KikodaOpenSourceProject(project, {
-  title: 'Kikoda Generated Config plugin',
+  title: 'Kikoda Generated Config',
 });
 
 project.synth();

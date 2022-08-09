@@ -9,6 +9,10 @@
       "type": "build"
     },
     {
+      "name": "@types/lodash",
+      "type": "build"
+    },
+    {
       "name": "@types/md5",
       "type": "build"
     },
@@ -114,6 +118,10 @@
     {
       "name": "webpack",
       "type": "build"
+    },
+    {
+      "name": "lodash",
+      "type": "bundled"
     },
     {
       "name": "md5",

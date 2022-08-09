@@ -4,11 +4,15 @@ import { v4 as uuid } from 'uuid';
 import { GeneratedConfig } from '../src/generated-config';
 
 describe('GeneratedConfig', () => {
+  beforeAll(() => {
+    process.env.DEBUG = 'true';
+  });
+
   test('config writes to file when outDir provided', () => {
     const outDir = uuid();
     const configToFile = new GeneratedConfig({
       stage: 'unitTest',
-      servicePath: tmpdir(),
+      srcPath: tmpdir(),
       outDir,
     });
 
@@ -25,7 +29,7 @@ describe('GeneratedConfig', () => {
     test('json files', () => {
       const inheritedJSONConfig = new GeneratedConfig<InheritedConfig>({
         stage: 'unitTestInheritedJson',
-        servicePath: __dirname,
+        srcPath: __dirname,
         configDir: 'config',
         baseConfigFileName: 'base.config.json',
         additionalConfig: {
@@ -41,7 +45,7 @@ describe('GeneratedConfig', () => {
     test('JS files', () => {
       const inheritedJSConfig = new GeneratedConfig<InheritedConfig>({
         stage: 'unitTestInheritedJs',
-        servicePath: __dirname,
+        srcPath: __dirname,
         configDir: 'config',
         baseConfigFileName: 'base.config.js',
         additionalConfig: {
@@ -57,7 +61,7 @@ describe('GeneratedConfig', () => {
     test('TS files', () => {
       const inheritedTSConfig = new GeneratedConfig<InheritedConfig>({
         stage: 'unitTestInheritedTs',
-        servicePath: __dirname,
+        srcPath: __dirname,
         configDir: 'config',
         baseConfigFileName: 'base.config.ts',
         additionalConfig: {
@@ -81,7 +85,7 @@ describe('GeneratedConfig', () => {
 
     const nonExistentStageConfig = new GeneratedConfig<OnlyBaseConfig>({
       stage: 'nonExistentStage',
-      servicePath: __dirname,
+      srcPath: __dirname,
       configDir: 'config',
       baseConfigFileName: 'base.config.ts',
       additionalConfig: {
