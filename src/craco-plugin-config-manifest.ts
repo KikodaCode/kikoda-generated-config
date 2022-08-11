@@ -17,24 +17,20 @@ export interface ConfigManifestPluginProps {
  *
  * @param configFileName The filename of the generated config file. This is mapped to the `config.json` key in the manifest.
  */
-export const ConfigManifestPlugin = (configFileName: string) => {
-  const manifest = new ConfigManifest(configFileName);
+export const ConfigManifestPlugin = (configFileName: string) => ({
+  overrideWebpackConfig: ({ webpackConfig }: ConfigManifestPluginProps) => {
+    webpackConfig.plugins = [
+      ...webpackConfig.plugins,
+      // add an entry in config-manifest.json with the name of config
+      // file so we can look it up and load it at runtime
+      new WebpackManifestPlugin({
+        publicPath: '/',
+        fileName: ConfigManifest.CONFIG_MANIFEST_FILENAME,
+        generate: () => new ConfigManifest(configFileName),
+      }),
+    ];
 
-  return {
-    overrideWebpackConfig: ({ webpackConfig }: ConfigManifestPluginProps) => {
-      webpackConfig.plugins = [
-        ...webpackConfig.plugins,
-        // add an entry in config-manifest.json with the name of config
-        // file so we can look it up and load it at runtime
-        new WebpackManifestPlugin({
-          publicPath: '/',
-          fileName: manifest.fileName,
-          generate: () => manifest.contents,
-        }),
-      ];
-
-      // Always return the config object.
-      return webpackConfig;
-    },
-  };
-};
+    // Always return the config object.
+    return webpackConfig;
+  },
+});

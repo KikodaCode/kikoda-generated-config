@@ -1,31 +1,26 @@
-export enum ConfigManifestAttribute {
-  /**
-   * The key in the config-manifest.json file that contains the filename of the config file.
-   */
-  CONFIG_FILE_KEY = 'config.json',
-  /**
-   * The filename of the Config Manfiest file.
-   */
-  CONFIG_MANIFEST_FILENAME = 'config-manifest.json',
-}
-
-export interface ConfigManifestContents {
+export interface IConfigManifest {
   files: {
-    [ConfigManifestAttribute.CONFIG_FILE_KEY]: string;
+    [ConfigManifest.CONFIG_FILE_KEY]: string;
   };
 }
 
-export class ConfigManifest {
-  fileName: string;
-  contents: ConfigManifestContents;
+export class ConfigManifest implements IConfigManifest {
+  /**
+   * The key in the config-manifest.json file that contains the filename of the config file.
+   */
+  static readonly CONFIG_FILE_KEY = 'config.json';
+  /**
+   * The filename of the Config Manfiest file.
+   */
+  static readonly CONFIG_MANIFEST_FILENAME = 'config-manifest.json';
+
+  readonly files: {
+    [ConfigManifest.CONFIG_FILE_KEY]: string;
+  };
 
   constructor(generatedConfigFileName: string) {
-    this.fileName = ConfigManifestAttribute.CONFIG_MANIFEST_FILENAME;
-
-    this.contents = {
-      files: {
-        [ConfigManifestAttribute.CONFIG_FILE_KEY]: generatedConfigFileName,
-      },
+    this.files = {
+      [ConfigManifest.CONFIG_FILE_KEY]: generatedConfigFileName,
     };
   }
 }
