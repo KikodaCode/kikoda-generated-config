@@ -1,5 +1,6 @@
 import { WebpackPluginInstance } from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
+import { ConfigManifest } from './config-manifest';
 
 export interface WebpackConfig {
   plugins: WebpackPluginInstance[];
@@ -16,27 +17,24 @@ export interface ConfigManifestPluginProps {
  *
  * @param configFileName The filename of the generated config file. This is mapped to the `config.json` key in the manifest.
  */
-export const ConfigManifestPlugin = (configFileName: string) => ({
-  overrideWebpackConfig: ({ webpackConfig }: ConfigManifestPluginProps) => {
-    webpackConfig.plugins = [
-      ...webpackConfig.plugins,
-      // add an entry in config-manifest.json with the name of config
-      // file so we can look it up and load it at runtime
-      new WebpackManifestPlugin({
-        publicPath: '/',
-        fileName: 'config-manifest.json',
-        generate: (seed, files) => ({
-          files: files.reduce(
-            () => ({
-              'config.json': configFileName,
-            }),
-            seed,
-          ),
-        }),
-      }),
-    ];
+export const ConfigManifestPlugin = (configFileName: string) => {
+  const manifest = new ConfigManifest(configFileName);
 
-    // Always return the config object.
-    return webpackConfig;
-  },
-});
+  return {
+    overrideWebpackConfig: ({ webpackConfig }: ConfigManifestPluginProps) => {
+      webpackConfig.plugins = [
+        ...webpackConfig.plugins,
+        // add an entry in config-manifest.json with the name of config
+        // file so we can look it up and load it at runtime
+        new WebpackManifestPlugin({
+          publicPath: '/',
+          fileName: manifest.fileName,
+          generate: () => manifest.contents,
+        }),
+      ];
+
+      // Always return the config object.
+      return webpackConfig;
+    },
+  };
+};
