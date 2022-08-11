@@ -31,7 +31,7 @@ const project = new TypeScriptProject({
       endOfLine: EndOfLine.LF,
     },
   },
-  bundledDeps: ['md5', 'webpack-manifest-plugin', 'lodash'],
+  bundledDeps: ['md5', 'lodash'],
   tsconfig: {
     compilerOptions: { esModuleInterop: true, lib: ['dom'], jsx: TypeScriptJsxMode.REACT },
   },
@@ -43,8 +43,9 @@ const project = new TypeScriptProject({
     '@types/uuid',
     'react',
     'uuid',
+    'webpack-manifest-plugin',
   ],
-  peerDeps: ['webpack'],
+  peerDeps: ['webpack', 'webpack-manifest-plugin'],
   packageName: '@kikoda/generated-config',
   gitignore: [],
   githubOptions: {
