@@ -44,7 +44,7 @@ const project = new TypeScriptProject({
     'react',
     'uuid',
   ],
-  peerDeps: ['webpack', 'react'],
+  peerDeps: ['webpack'],
   packageName: '@kikoda/generated-config',
   gitignore: [],
   githubOptions: {

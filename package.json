@@ -61,7 +61,6 @@
     "webpack": "5.74.0"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
     "webpack": "^5.74.0"
   },
   "dependencies": {
