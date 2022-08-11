@@ -120,6 +120,10 @@
       "type": "build"
     },
     {
+      "name": "webpack-manifest-plugin",
+      "type": "build"
+    },
+    {
       "name": "lodash",
       "type": "bundled"
     },
@@ -128,11 +132,11 @@
       "type": "bundled"
     },
     {
-      "name": "webpack-manifest-plugin",
-      "type": "bundled"
+      "name": "webpack",
+      "type": "peer"
     },
     {
-      "name": "webpack",
+      "name": "webpack-manifest-plugin",
       "type": "peer"
     }
   ],
