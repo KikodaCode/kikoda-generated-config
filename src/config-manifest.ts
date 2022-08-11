@@ -6,7 +6,7 @@ export enum ConfigManifestAttribute {
   /**
    * The filename of the Config Manfiest file.
    */
-  CONFIG_MANFIEST_FILENAME = 'config-manifest.json',
+  CONFIG_MANIFEST_FILENAME = 'config-manifest.json',
 }
 
 export interface ConfigManifestContents {
@@ -20,11 +20,11 @@ export class ConfigManifest {
   contents: ConfigManifestContents;
 
   constructor(generatedConfigFileName: string) {
-    this.fileName = ConfigManifestAttribute.CONFIG_MANFIEST_FILENAME;
+    this.fileName = ConfigManifestAttribute.CONFIG_MANIFEST_FILENAME;
 
     this.contents = {
       files: {
-        'config.json': generatedConfigFileName,
+        [ConfigManifestAttribute.CONFIG_FILE_KEY]: generatedConfigFileName,
       },
     };
   }
