@@ -35,17 +35,8 @@ const project = new TypeScriptProject({
   tsconfig: {
     compilerOptions: { esModuleInterop: true, lib: ['dom'], jsx: TypeScriptJsxMode.REACT },
   },
-  devDeps: [
-    '@kikoda/projen-templates',
-    '@types/lodash',
-    '@types/md5',
-    '@types/react',
-    '@types/uuid',
-    'react',
-    'uuid',
-    'webpack-manifest-plugin',
-  ],
-  peerDeps: ['webpack', 'webpack-manifest-plugin'],
+  devDeps: ['@kikoda/projen-templates', '@types/lodash', '@types/md5', '@types/uuid', 'uuid'],
+  peerDeps: [],
   packageName: '@kikoda/generated-config',
   gitignore: [],
   githubOptions: {

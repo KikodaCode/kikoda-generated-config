@@ -2,7 +2,7 @@ import { LayeredConfig } from '../src';
 
 describe('Layered Config', () => {
   class TestConfig {
-    public readonly config: LayeredConfig;
+    public readonly config: LayeredConfig<any, any>;
 
     constructor({ base, layer }: { base: any; layer: any }) {
       this.config = new LayeredConfig(base, layer);

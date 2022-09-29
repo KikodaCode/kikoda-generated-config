@@ -41,10 +41,29 @@ export interface GeneratedConfigProps {
   readonly additionalConfig?: any;
 }
 
+/**
+ * IAdditionalConfig represents any additional configuration items that are added to the generated
+ * configuration file. This is used to provide deploy-time configuration items to the application.
+ *
+ * @export
+ * @interface IAdditionalConfig
+ * @typedef {IAdditionalConfig}
+ */
 export interface IAdditionalConfig {
   readonly additionalConfig?: any;
 }
 
+/**
+ * Generate a config file from a base config and a set of config layers. The
+ * config layers are merged in order, with later layers taking precedence over
+ * earlier layers. The resulting config is available in the `config` class attribute
+ * and/or can be written to a file in the output directory.
+ *
+ * @export
+ * @class GeneratedConfig
+ * @typedef {GeneratedConfig}
+ * @template T extends IAdditionalConfig
+ */
 export class GeneratedConfig<T extends IAdditionalConfig> {
   /** Represents the generated config object */
   public config: T;
