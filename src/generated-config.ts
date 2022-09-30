@@ -7,7 +7,7 @@ import { debug } from './util';
 
 const SUPPORTED_CONFIG_EXTENSIONS = ['.json', '.js', '.ts'];
 
-export interface GeneratedConfigProps {
+export interface GeneratedConfigProps extends IAdditionalConfig {
   /**
    * Target deployment stage
    */
@@ -34,11 +34,6 @@ export interface GeneratedConfigProps {
 
   /** write the generated config file to a directory; relative to srcPath */
   readonly outDir?: string;
-
-  /** Provide any additional configuration items to add to the generated configuration file. This
-   * will be added to the config as the `additionalConfig` attribute.
-   */
-  readonly additionalConfig?: any;
 }
 
 /**
@@ -50,6 +45,9 @@ export interface GeneratedConfigProps {
  * @typedef {IAdditionalConfig}
  */
 export interface IAdditionalConfig {
+  /** Provide any additional configuration items to add to the generated configuration file. This
+   * will be added to the config as the `additionalConfig` attribute.
+   */
   readonly additionalConfig?: any;
 }
 

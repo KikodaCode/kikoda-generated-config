@@ -1,12 +1,12 @@
 import { KikodaOpenSourceProject } from '@kikoda/projen-templates';
 import { YamlFile } from 'projen';
 import { GithubCredentials } from 'projen/lib/github';
-import { ArrowParens, EndOfLine, TrailingComma, TypeScriptJsxMode } from 'projen/lib/javascript';
+import { ArrowParens, EndOfLine, TrailingComma } from 'projen/lib/javascript';
 import { TypeScriptProject } from 'projen/lib/typescript';
 
 const project = new TypeScriptProject({
   name: 'kikoda-generated-config',
-  description: 'Generated Config webpack plugin and utilities.',
+  description: 'Generate a config file from a base config and a set of config layers',
   authorName: 'Kikoda, LLC',
   authorEmail: 'platform@kikoda.com',
   repository: 'https://github.com/KikodaCode/kikoda-delivery.git',
@@ -33,7 +33,7 @@ const project = new TypeScriptProject({
   },
   bundledDeps: ['md5', 'lodash'],
   tsconfig: {
-    compilerOptions: { esModuleInterop: true, lib: ['dom'], jsx: TypeScriptJsxMode.REACT },
+    compilerOptions: { esModuleInterop: true },
   },
   devDeps: ['@kikoda/projen-templates', '@types/lodash', '@types/md5', '@types/uuid', 'uuid'],
   peerDeps: [],
