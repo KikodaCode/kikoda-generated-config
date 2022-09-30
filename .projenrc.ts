@@ -53,6 +53,10 @@ const project = new JsiiProject({
       coveragePathIgnorePatterns: ['/node_modules/', 'test/config'],
     },
   },
+  publishToNuget: {
+    dotNetNamespace: 'Kikoda.GeneratedConfig',
+    packageId: 'Kikoda.GeneratedConfig',
+  },
 });
 
 new YamlFile(project, 'codecov.yml', {
