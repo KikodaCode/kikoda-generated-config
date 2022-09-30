@@ -7,7 +7,7 @@ import { debug } from './util';
 
 const SUPPORTED_CONFIG_EXTENSIONS = ['.json', '.js', '.ts'];
 
-export interface GeneratedConfigProps extends IAdditionalConfig {
+export interface GeneratedConfigProps extends AdditionalConfigObject {
   /**
    * Target deployment stage
    */
@@ -37,14 +37,10 @@ export interface GeneratedConfigProps extends IAdditionalConfig {
 }
 
 /**
- * IAdditionalConfig represents any additional configuration items that are added to the generated
+ * AdditionalConfigObject represents any additional configuration items that are added to the generated
  * configuration file. This is used to provide deploy-time configuration items to the application.
- *
- * @export
- * @interface IAdditionalConfig
- * @typedef {IAdditionalConfig}
  */
-export interface IAdditionalConfig {
+export interface AdditionalConfigObject {
   /** Provide any additional configuration items to add to the generated configuration file. This
    * will be added to the config as the `additionalConfig` attribute.
    */
@@ -56,13 +52,8 @@ export interface IAdditionalConfig {
  * config layers are merged in order, with later layers taking precedence over
  * earlier layers. The resulting config is available in the `config` class attribute
  * and/or can be written to a file in the output directory.
- *
- * @export
- * @class GeneratedConfig
- * @typedef {GeneratedConfig}
- * @template T extends IAdditionalConfig
  */
-export class GeneratedConfig<T extends IAdditionalConfig> {
+export class GeneratedConfig<T extends AdditionalConfigObject> {
   /** Represents the generated config object */
   public config: T;
 

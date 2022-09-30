@@ -1,6 +1,6 @@
 export interface IConfigManifest {
-  files: {
-    [ConfigManifest.CONFIG_FILE_KEY]: string;
+  readonly files: {
+    [key: string]: string;
   };
 }
 
@@ -15,7 +15,7 @@ export class ConfigManifest implements IConfigManifest {
   static readonly CONFIG_MANIFEST_FILENAME = 'config-manifest.json';
 
   readonly files: {
-    [ConfigManifest.CONFIG_FILE_KEY]: string;
+    [key: string]: string;
   };
 
   constructor(generatedConfigFileName: string) {

@@ -1,15 +1,15 @@
 import { KikodaOpenSourceProject } from '@kikoda/projen-templates';
 import { YamlFile } from 'projen';
+import { JsiiProject } from 'projen/lib/cdk';
 import { GithubCredentials } from 'projen/lib/github';
 import { ArrowParens, EndOfLine, TrailingComma } from 'projen/lib/javascript';
-import { TypeScriptProject } from 'projen/lib/typescript';
 
-const project = new TypeScriptProject({
+const project = new JsiiProject({
   name: 'kikoda-generated-config',
   description: 'Generate a config file from a base config and a set of config layers',
-  authorName: 'Kikoda, LLC',
-  authorEmail: 'platform@kikoda.com',
-  repository: 'https://github.com/KikodaCode/kikoda-delivery.git',
+  author: 'Kikoda, LLC',
+  authorAddress: 'platform@kikoda.com',
+  repositoryUrl: 'https://github.com/KikodaCode/kikoda-delivery.git',
   defaultReleaseBranch: 'main',
   keywords: ['configuration', 'websites', 'cicd', 'webpack', 'react'],
   stability: 'experimental',
